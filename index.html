@@ -3,45 +3,134 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ben | Mechanical Engineering & Controls</title>
+  <title>Benjamin Du | Mechanical Engineering, Controls & Robotics</title>
+  <meta name="description" content="Portfolio of Benjamin Du: Georgia Tech mechanical engineering, controls, and robotics.">
   <style>
+    :root {
+      --bg: #0d1117;
+      --panel: #161b22;
+      --border: #272e38;
+      --text: #e6edf3;
+      --muted: #9aa5b1;
+      --accent: #58a6ff;
+      --accent-soft: rgba(88, 166, 255, 0.12);
+    }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; color: #1a1a1a; background: #fafafa; line-height: 1.6; }
-    header, section, footer { max-width: 800px; margin: 0 auto; padding: 48px 24px; }
-    h1 { font-size: 2.4rem; margin-bottom: 8px; }
-    h2 { font-size: 1.5rem; margin-bottom: 20px; border-bottom: 2px solid #e5e5e5; padding-bottom: 8px; }
-    .tagline { font-size: 1.15rem; color: #555; margin-bottom: 16px; }
-    a { color: #0b5fff; text-decoration: none; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
+    a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
-    .links a { margin-right: 16px; font-weight: 600; }
-    .card { background: #fff; border: 1px solid #e5e5e5; border-radius: 10px; padding: 20px; margin-bottom: 20px; }
-    .card h3 { margin-bottom: 6px; }
-    .tags { margin: 10px 0; }
-    .tags span { display: inline-block; background: #eef2ff; color: #3730a3; font-size: 0.8rem; padding: 2px 10px; border-radius: 999px; margin-right: 6px; }
-    .video { position: relative; padding-bottom: 56.25%; height: 0; margin-top: 12px; }
-    .video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; border-radius: 8px; }
-    footer { color: #777; font-size: 0.9rem; text-align: center; }
+
+    nav {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(13, 17, 23, 0.85);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+    nav .inner {
+      max-width: 860px; margin: 0 auto; padding: 14px 24px;
+      display: flex; gap: 22px; flex-wrap: wrap; align-items: center;
+    }
+    nav .brand { font-weight: 700; color: var(--text); margin-right: auto; }
+    nav a { color: var(--muted); font-size: 0.95rem; }
+    nav a:hover { color: var(--text); text-decoration: none; }
+
+    header, section, footer { max-width: 860px; margin: 0 auto; padding: 56px 24px; }
+    header { padding-top: 80px; }
+    h1 { font-size: clamp(2.2rem, 6vw, 3.2rem); line-height: 1.15; margin-bottom: 12px; }
+    .tagline { font-size: 1.2rem; color: var(--muted); max-width: 640px; margin-bottom: 24px; }
+    .buttons { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      display: inline-block; padding: 10px 20px; border-radius: 8px;
+      border: 1px solid var(--border); color: var(--text); font-weight: 600;
+      background: var(--panel);
+    }
+    .btn:hover { border-color: var(--accent); text-decoration: none; }
+    .btn.primary { background: var(--accent); border-color: var(--accent); color: #0d1117; }
+
+    h2 {
+      font-size: 1.6rem; margin-bottom: 24px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    h2::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+
+    .card {
+      background: var(--panel); border: 1px solid var(--border);
+      border-radius: 12px; padding: 24px; margin-bottom: 20px;
+    }
+    .card h3 { font-size: 1.2rem; margin-bottom: 4px; }
+    .meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 12px; }
+    .card ul { padding-left: 20px; color: #c9d1d9; }
+    .card li { margin-bottom: 6px; }
+    .tags { margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap; }
+    .tags span {
+      background: var(--accent-soft); color: var(--accent);
+      font-size: 0.8rem; padding: 3px 12px; border-radius: 999px;
+    }
+
+    .stats { display: flex; gap: 14px; flex-wrap: wrap; margin: 16px 0; }
+    .stat {
+      flex: 1 1 200px; background: var(--bg); border: 1px solid var(--border);
+      border-radius: 10px; padding: 14px 16px;
+    }
+    .stat .num { font-size: 1.5rem; font-weight: 700; color: var(--accent); }
+    .stat .label { font-size: 0.85rem; color: var(--muted); }
+
+    .videos { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 18px; }
+    .video-wrap { flex: 0 1 260px; }
+    .video-wrap .frame { position: relative; padding-bottom: 177.78%; height: 0; }
+    .video-wrap iframe {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      border: 0; border-radius: 10px; background: #000;
+    }
+    .video-wrap .caption { font-size: 0.85rem; color: var(--muted); margin-top: 6px; text-align: center; }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+
+    footer { text-align: center; color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--border); }
   </style>
 </head>
 <body>
 
+  <nav>
+    <div class="inner">
+      <span class="brand">Benjamin Du</span>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
   <header>
-    <h1>Ben [Last Name]</h1>
-    <p class="tagline">Mechanical Engineering grad student at Georgia Tech, focused on controls and robotics.</p>
-    <p class="links">
-      <a href="https://github.com/YOUR-USERNAME">GitHub</a>
-      <a href="https://www.linkedin.com/in/YOUR-LINKEDIN">LinkedIn</a>
-      <a href="mailto:you@example.com">Email</a>
-      <a href="resume.pdf">Resume</a>
+    <h1>Benjamin Du</h1>
+    <p class="tagline">
+      Mechanical engineer working on controls, state estimation, and reinforcement learning for
+      robots, from drones to humanoids.
     </p>
+    <div class="buttons">
+      <a class="btn primary" href="#projects">See my projects</a>
+      <a class="btn" href="resume.pdf">Resume (PDF)</a>
+      <a class="btn" href="https://www.linkedin.com/in/benjamin-du">LinkedIn</a>
+      <a class="btn" href="https://github.com/iambendu">GitHub</a>
+    </div>
   </header>
 
   <section id="about">
     <h2>About</h2>
     <p>
-      I'm a Master's student in Mechanical Engineering at Georgia Tech (B.S. in ME, 2026).
-      I've worked as a controls engineering intern at Carrier, and I'm interested in
-      control systems, reinforcement learning, and autonomous robots.
+      I'm a Master's student in Mechanical Engineering at Georgia Tech (B.S. in Mechanical
+      Engineering, 4.0 GPA, 2026) and a graduate research assistant in the LIDAR Lab. I enjoy the
+      full loop from modeling and controller design to estimation, simulation, and hardware.
+      Previously I've worked as a controls engineering intern at Carrier and a quality engineering
+      intern at Perryman Company.
     </p>
   </section>
 
@@ -49,40 +138,169 @@
     <h2>Projects</h2>
 
     <div class="card">
-      <h3>Autonomous Drone Racing in Simulation</h3>
-      <p>Controls project for AI Grand Prix-style autonomous drone racing, built simulation-first in MuJoCo.</p>
-      <div class="tags"><span>MuJoCo</span><span>Controls</span><span>Python</span></div>
-      <a href="https://github.com/YOUR-USERNAME/drone-racing-sim">View code →</a>
-      <!-- To embed a demo video, replace VIDEO_ID with your YouTube video's ID and remove these comment marks:
-      <div class="video"><iframe src="https://www.youtube.com/embed/VIDEO_ID" allowfullscreen></iframe></div>
-      -->
+      <h3>Moving-Platform Reinforcement Learning for the Unitree G1 Humanoid</h3>
+      <div class="meta">Graduate research, LIDAR Lab, Georgia Tech &middot; Aug 2026 &ndash; Present</div>
+      <ul>
+        <li>Built an actuated moving platform environment (roll/pitch hinges with PD position actuators) for Unitree G1 humanoid reinforcement learning research in mjlab.</li>
+        <li>Implemented a GPU-batched motion replay pipeline for recorded smartphone IMU data (100&ndash;50 Hz interpolation, offset removal, intensity scaling) across parallel training environments.</li>
+        <li>Trained PPO balance policies on the platform and built an evaluation harness measuring survival rate, body tilt, and platform kinematics.</li>
+      </ul>
+      <div class="stats">
+        <div class="stat">
+          <div class="num">8.6% &rarr; 99.2%</div>
+          <div class="label">Survival on replayed motion (256 trials): flat-ground policy vs. moving-platform-trained policy</div>
+        </div>
+        <div class="stat">
+          <div class="num">0% &rarr; 98%</div>
+          <div class="label">Survival on unseen 5&deg; sinusoidal tilts: flat-ground policy vs. moving-platform-trained policy</div>
+        </div>
+      </div>
+      <div class="videos">
+        <div class="video-wrap">
+          <div class="frame">
+            <iframe src="https://www.youtube.com/embed/dFPhgg83ruQ" title="Moving platform RL demo 1" loading="lazy" allowfullscreen></iframe>
+          </div>
+          <div class="caption">Demo 1</div>
+        </div>
+        <div class="video-wrap">
+          <div class="frame">
+            <iframe src="https://www.youtube.com/embed/knJ6pcsPsKE" title="Moving platform RL demo 2" loading="lazy" allowfullscreen></iframe>
+          </div>
+          <div class="caption">Demo 2</div>
+        </div>
+      </div>
+      <div class="tags"><span>Reinforcement Learning</span><span>PPO</span><span>mjlab</span><span>MuJoCo</span><span>Python</span></div>
     </div>
 
     <div class="card">
-      <h3>Moving Platform for Humanoid RL</h3>
-      <p>Research on training Unitree G1 walking policies on a moving (roll/pitch) platform in mjlab.</p>
-      <div class="tags"><span>Reinforcement Learning</span><span>Humanoid</span><span>mjlab</span></div>
-      <a href="#">Details coming soon</a>
+      <h3>Camera-IMU Navigation for an Autonomous Quadcopter</h3>
+      <div class="meta">Sept 2026 &ndash; Present</div>
+      <ul>
+        <li>Designed cascaded altitude, attitude, position, and yaw controllers from transfer function models, predicting step response analytically and verifying it in simulation.</li>
+        <li>Built a 15-state error-state Kalman filter fusing a biased IMU with onboard camera gate detections, estimating accelerometer and gyro biases.</li>
+        <li>Flew a gate course on estimates alone with no collisions and 0.05 m RMS estimation error in simulation.</li>
+      </ul>
+      <div class="stats">
+        <div class="stat">
+          <div class="num">99.4%</div>
+          <div class="label">Decrease in position error</div>
+        </div>
+        <div class="stat">
+          <div class="num">0.05 m</div>
+          <div class="label">RMS estimation error in simulation</div>
+        </div>
+      </div>
+      <div class="tags"><span>Kalman Filter</span><span>State Estimation</span><span>Flight Control</span><span>MuJoCo</span><span>Python</span></div>
+    </div>
+
+    <div class="two-col">
+      <div class="card">
+        <h3>Lockheed Martin Capstone</h3>
+        <div class="meta">Georgia Tech &middot; Aug &ndash; Nov 2024</div>
+        <ul>
+          <li>Designed a mount for a vehicle-integrated drone control station, factoring in ergonomics and machine design.</li>
+          <li>Ran user testing of rapid release from a vehicle with officers and firefighters to assess feasibility.</li>
+        </ul>
+        <div class="tags"><span>Machine Design</span><span>User Testing</span></div>
+      </div>
+
+      <div class="card">
+        <h3>Hytech Racing (Formula SAE)</h3>
+        <div class="meta">Suspension Engineer &middot; Aug 2024 &ndash; Dec 2025</div>
+        <ul>
+          <li>Redesigned and manufactured a suspension damper elongation attachment so existing dampers could be reused.</li>
+        </ul>
+        <div class="tags"><span>Suspension</span><span>Manufacturing</span></div>
+      </div>
     </div>
 
     <div class="card">
-      <h3>Kalshi Prediction-Market Modeling</h3>
-      <p>Group project modeling price behavior in Kalshi prediction markets.</p>
-      <div class="tags"><span>Machine Learning</span><span>Data Analysis</span></div>
-      <a href="#">Details coming soon</a>
+      <h3>Creative Decisions and Design (ME2110)</h3>
+      <div class="meta">Georgia Tech &middot; Aug &ndash; Nov 2024</div>
+      <ul>
+        <li>Led a team of 4 to finish 8th out of 66 teams, building a robot under volume, cost, and time constraints with a pneumatic system, 2 motors, and an Arduino.</li>
+        <li>Turned concepts into prototypes with 3D printing and SolidWorks, then manufactured them using a laser cutter, bandsaw, drill press, Dremel, lathe, and waterjet.</li>
+      </ul>
+      <div class="tags"><span>SolidWorks</span><span>Arduino</span><span>Prototyping</span></div>
     </div>
   </section>
 
   <section id="experience">
     <h2>Experience</h2>
+
     <div class="card">
-      <h3>Controls Engineering Intern, Carrier</h3>
-      <p>Summers 2025 and 2026. Add one or two lines about what you built or improved.</p>
+      <h3>Graduate Robotics Research Assistant, LIDAR Lab</h3>
+      <div class="meta">Georgia Tech &middot; Atlanta, GA &middot; Aug 2026 &ndash; Present</div>
+      <ul>
+        <li>Humanoid reinforcement learning research on a moving platform (see the project above).</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Controls Engineer Intern, Carrier</h3>
+      <div class="meta">Atlanta, GA &middot; Summer 2025 &amp; 2026</div>
+      <ul>
+        <li>Built control panels to import logic for air handlers and sensors for commercial buildings.</li>
+        <li>Designed and documented a chiller system, updating drawings and module termination points and revising the Sequence and Description of Operations to meet system requirements.</li>
+        <li>Developed and refined HVAC control logic in WebCTRL to improve user efficiency and functionality.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Quality Engineer Intern, Perryman Company</h3>
+      <div class="meta">Pittsburgh, PA &middot; Summer 2023 &amp; 2024</div>
+      <ul>
+        <li>Generated $250,000 in revenue by analyzing rejected material inventory and repurposing it for existing orders.</li>
+        <li>Investigated noncompliant inventory through speed-of-sound experiments.</li>
+        <li>Ran a study to find the most efficient heat treatment method by analyzing different variables.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Statics Learning Assistant, Georgia Tech</h3>
+      <div class="meta">Jan 2024 &ndash; May 2026</div>
+      <ul>
+        <li>Spent 10 hours weekly helping 50 students understand systems under applied forces and moments, in lectures, office hours, and recitations.</li>
+      </ul>
     </div>
   </section>
 
+  <section id="skills">
+    <h2>Skills &amp; Education</h2>
+    <div class="two-col">
+      <div class="card">
+        <h3>Technical Skills</h3>
+        <div class="tags">
+          <span>Python</span><span>C++</span><span>MATLAB</span><span>MuJoCo</span>
+          <span>SolidWorks</span><span>CATIA</span><span>OpenFOAM</span>
+        </div>
+        <div class="meta" style="margin-top:16px;">Fabrication</div>
+        <div class="tags" style="margin-top:0;">
+          <span>Lathe</span><span>Miter Saw</span><span>Band Saw</span><span>Drill Press</span><span>Waterjet</span>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Education</h3>
+        <ul style="margin-top:10px;">
+          <li>Georgia Institute of Technology, M.S. Mechanical Engineering (Aug 2026 &ndash; May 2027)</li>
+          <li>Georgia Institute of Technology, B.S. Mechanical Engineering, GPA 4.0 (Aug 2022 &ndash; May 2026)</li>
+          <li>Georgia Tech Honors Day Award</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>
+      The best ways to reach me are
+      <a href="https://www.linkedin.com/in/benjamin-du">LinkedIn</a> or
+      <a href="mailto:bdu34@gatech.edu">bdu34@gatech.edu</a>.
+    </p>
+  </section>
+
   <footer>
-    <p>&copy; 2026 Ben Du</p>
+    <p>&copy; 2026 Benjamin Du</p>
   </footer>
 
 </body>
