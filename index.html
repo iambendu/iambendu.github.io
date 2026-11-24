@@ -5,120 +5,201 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Benjamin Du | Mechanical Engineering, Controls & Robotics</title>
   <meta name="description" content="Portfolio of Benjamin Du: Georgia Tech mechanical engineering, controls, and robotics.">
+  <meta name="theme-color" content="#0d1117">
   <style>
     :root {
       --bg: #0d1117;
       --panel: #161b22;
-      --border: #272e38;
-      --text: #e6edf3;
-      --muted: #9aa5b1;
-      --accent: #58a6ff;
-      --accent-soft: rgba(88, 166, 255, 0.12);
+      --border: #2b333e;
+      --text: #eef2f6;
+      --body: #d3dbe3;
+      --muted: #b1bbc7;
+      --accent: #6cb2ff;
+      --accent-soft: rgba(108, 178, 255, 0.14);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; scroll-padding-top: 76px; font-size: 17px; }
     body {
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
       background: var(--bg);
-      color: var(--text);
+      background-image: radial-gradient(900px 380px at 50% -120px, rgba(108, 178, 255, 0.09), transparent);
+      background-repeat: no-repeat;
+      color: var(--body);
       line-height: 1.65;
     }
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; }
+    a:focus-visible, button:focus-visible, summary:focus-visible {
+      outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 6px;
+    }
 
+    /* ---------- Navigation ---------- */
     nav {
-      position: sticky; top: 0; z-index: 10;
-      background: rgba(13, 17, 23, 0.85);
+      position: sticky; top: 0; z-index: 20;
+      background: rgba(13, 17, 23, 0.88);
       backdrop-filter: blur(8px);
       border-bottom: 1px solid var(--border);
     }
     nav .inner {
-      max-width: 860px; margin: 0 auto; padding: 14px 24px;
-      display: flex; gap: 22px; flex-wrap: wrap; align-items: center;
+      max-width: 860px; margin: 0 auto; padding: 12px 24px;
+      display: flex; align-items: center; gap: 18px;
     }
     nav .brand { font-weight: 700; color: var(--text); margin-right: auto; }
-    nav a { color: var(--muted); font-size: 0.95rem; }
-    nav a:hover { color: var(--text); text-decoration: none; }
+    nav .links { display: flex; align-items: center; gap: 20px; }
+    nav .links a.nav-link {
+      color: var(--muted); font-size: 0.95rem; padding: 4px 0;
+      border-bottom: 2px solid transparent;
+    }
+    nav .links a.nav-link:hover { color: var(--text); text-decoration: none; }
+    nav .links a.nav-link[aria-current="true"] { color: var(--text); border-bottom-color: var(--accent); }
+    nav .nav-resume {
+      border: 1px solid var(--accent); color: var(--accent); font-weight: 600;
+      font-size: 0.92rem; padding: 6px 14px; border-radius: 8px;
+    }
+    nav .nav-resume:hover { background: var(--accent-soft); text-decoration: none; }
+    .menu-btn {
+      display: none; background: var(--panel); color: var(--text);
+      border: 1px solid var(--border); border-radius: 8px;
+      padding: 6px 12px; font: inherit; font-size: 0.92rem; cursor: pointer;
+    }
+    @media (max-width: 720px) {
+      .menu-btn { display: inline-block; }
+      nav .links {
+        display: none; position: absolute; top: 100%; left: 0; right: 0;
+        flex-direction: column; align-items: stretch; gap: 0;
+        background: var(--bg); border-bottom: 1px solid var(--border); padding: 8px 24px 16px;
+      }
+      nav.open .links { display: flex; }
+      nav .links a.nav-link { padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 1rem; }
+      nav .links a.nav-link[aria-current="true"] { border-bottom-color: var(--border); color: var(--accent); }
+      nav .nav-resume { margin-top: 14px; text-align: center; padding: 10px 14px; }
+    }
 
+    /* ---------- Layout ---------- */
     header, section, footer { max-width: 860px; margin: 0 auto; padding: 56px 24px; }
     header { padding-top: 80px; }
-    h1 { font-size: clamp(2.2rem, 6vw, 3.2rem); line-height: 1.15; margin-bottom: 12px; }
+    h1 { font-size: clamp(2.2rem, 6vw, 3.2rem); line-height: 1.15; margin-bottom: 12px; color: var(--text); }
     .tagline { font-size: 1.2rem; color: var(--muted); max-width: 640px; margin-bottom: 24px; }
     .buttons { display: flex; gap: 12px; flex-wrap: wrap; }
     .btn {
       display: inline-block; padding: 10px 20px; border-radius: 8px;
       border: 1px solid var(--border); color: var(--text); font-weight: 600;
-      background: var(--panel);
+      background: var(--panel); transition: border-color 0.2s, transform 0.2s;
     }
-    .btn:hover { border-color: var(--accent); text-decoration: none; }
+    .btn:hover { border-color: var(--accent); text-decoration: none; transform: translateY(-1px); }
     .btn.primary { background: var(--accent); border-color: var(--accent); color: #0d1117; }
 
     h2 {
-      font-size: 1.6rem; margin-bottom: 24px;
+      font-size: 1.6rem; margin-bottom: 24px; color: var(--text);
       display: flex; align-items: center; gap: 14px;
     }
     h2::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+    .subhead {
+      font-size: 0.85rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--muted); margin: 8px 0 14px;
+    }
+    .subhead.more { margin-top: 40px; }
 
+    /* ---------- Cards ---------- */
     .card {
       background: var(--panel); border: 1px solid var(--border);
       border-radius: 12px; padding: 24px; margin-bottom: 20px;
+      transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s;
     }
-    .card h3 { font-size: 1.2rem; margin-bottom: 4px; }
-    .meta { color: var(--muted); font-size: 0.9rem; margin-bottom: 12px; }
-    .card ul { padding-left: 20px; color: #c9d1d9; }
+    .card:hover {
+      border-color: rgba(108, 178, 255, 0.45);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    }
+    .card h3 { font-size: 1.2rem; margin-bottom: 4px; color: var(--text); }
+    .meta { color: var(--muted); font-size: 0.95rem; margin-bottom: 12px; }
+    .card ul { padding-left: 20px; color: var(--body); }
     .card li { margin-bottom: 6px; }
     .tags { margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap; }
     .tags span {
       background: var(--accent-soft); color: var(--accent);
-      font-size: 0.8rem; padding: 3px 12px; border-radius: 999px;
+      font-size: 0.85rem; padding: 3px 12px; border-radius: 999px;
     }
 
+    /* Results first */
     .stats { display: flex; gap: 14px; flex-wrap: wrap; margin: 16px 0; }
     .stat {
       flex: 1 1 200px; background: var(--bg); border: 1px solid var(--border);
       border-radius: 10px; padding: 14px 16px;
     }
-    .stat .num { font-size: 1.5rem; font-weight: 700; color: var(--accent); }
-    .stat .label { font-size: 0.85rem; color: var(--muted); }
+    .stat .num { font-size: 1.6rem; font-weight: 700; color: var(--accent); line-height: 1.25; }
+    .stat .label { font-size: 0.92rem; color: var(--muted); }
+    .note { font-size: 0.92rem; color: var(--muted); margin: -4px 0 8px; }
 
-    .videos { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 18px; }
+    /* Then media */
+    .videos { display: flex; gap: 20px; flex-wrap: wrap; margin: 18px 0 6px; }
     .video-wrap { flex: 0 1 260px; }
     .video-wrap .frame { position: relative; padding-bottom: 177.78%; height: 0; }
     .video-wrap iframe {
       position: absolute; inset: 0; width: 100%; height: 100%;
       border: 0; border-radius: 10px; background: #000;
     }
-    .video-wrap .caption { font-size: 0.85rem; color: var(--muted); margin-top: 6px; text-align: center; }
+    .caption, .media figcaption { font-size: 0.9rem; color: var(--muted); margin-top: 6px; }
+    .video-wrap .caption { text-align: center; }
 
-    .media { margin-top: 18px; }
+    .media { margin: 18px 0 6px; }
     .media figure { margin-bottom: 18px; }
     .media video, .media img {
-      display: block; max-width: 100%; height: auto;
+      display: block; width: 100%; max-width: 100%; height: auto;
       border-radius: 10px; border: 1px solid var(--border); background: #000;
     }
-    .media figcaption { font-size: 0.85rem; color: var(--muted); margin-top: 6px; }
+    .media-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    @media (max-width: 640px) { .media-grid { grid-template-columns: 1fr; } }
 
+    /* Then details */
+    details { margin-top: 14px; border-top: 1px solid var(--border); padding-top: 12px; }
+    summary {
+      cursor: pointer; color: var(--accent); font-weight: 600; font-size: 0.98rem;
+      list-style: none; display: inline-flex; align-items: center; gap: 8px;
+    }
+    summary::-webkit-details-marker { display: none; }
+    summary::before { content: "+"; display: inline-block; width: 1em; text-align: center; font-weight: 700; }
+    details[open] > summary::before { content: "\2212"; }
+    details ul { margin-top: 12px; }
+
+    .grid-auto { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px; }
+    .grid-auto .card { margin-bottom: 0; }
     .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
 
-    footer { text-align: center; color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--border); }
+    footer { text-align: center; color: var(--muted); font-size: 0.92rem; border-top: 1px solid var(--border); }
+
+    /* ---------- Subtle motion ---------- */
+    .js .reveal { opacity: 0; transform: translateY(14px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .js .reveal.in { opacity: 1; transform: none; }
+    .js .card.reveal.in { transition: opacity 0.6s ease, transform 0.25s, border-color 0.25s, box-shadow 0.25s; }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .js .reveal { opacity: 1; transform: none; transition: none; }
+      .card, .btn { transition: none; }
+      .card:hover, .btn:hover { transform: none; }
+    }
   </style>
 </head>
 <body>
 
   <nav>
     <div class="inner">
-      <span class="brand">Benjamin Du</span>
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#experience">Experience</a>
-      <a href="#skills">Skills</a>
-      <a href="#awards">Awards</a>
-      <a href="#contact">Contact</a>
+      <a class="brand" href="#top" style="text-decoration:none;">Benjamin Du</a>
+      <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
+      <div class="links" id="nav-links">
+        <a class="nav-link" href="#about">About</a>
+        <a class="nav-link" href="#projects">Projects</a>
+        <a class="nav-link" href="#experience">Experience</a>
+        <a class="nav-link" href="#skills">Skills</a>
+        <a class="nav-link" href="#awards">Awards</a>
+        <a class="nav-link" href="#contact">Contact</a>
+        <a class="nav-resume" href="resume.pdf">Resume</a>
+      </div>
     </div>
   </nav>
 
-  <header>
+  <header id="top">
     <h1>Benjamin Du</h1>
     <p class="tagline">
       Mechanical engineer working on controls, state estimation, and reinforcement learning for
@@ -132,7 +213,7 @@
     </div>
   </header>
 
-  <section id="about">
+  <section id="about" class="reveal">
     <h2>About</h2>
     <p>
       I'm a Master's student in Mechanical Engineering at Georgia Tech (B.S. in Mechanical
@@ -144,16 +225,14 @@
   </section>
 
   <section id="projects">
-    <h2>Projects</h2>
+    <h2 class="reveal">Projects</h2>
+    <p class="subhead reveal">Featured</p>
 
-    <div class="card">
+    <!-- ===== Featured 1: G1 moving platform ===== -->
+    <div class="card reveal">
       <h3>Moving-Platform Reinforcement Learning for the Unitree G1 Humanoid</h3>
       <div class="meta">Graduate research, LIDAR Lab, Georgia Tech &middot; Aug 2026 &ndash; Present</div>
-      <ul>
-        <li>Built an actuated moving platform environment (roll/pitch hinges with PD position actuators) for Unitree G1 humanoid reinforcement learning research in mjlab.</li>
-        <li>Implemented a GPU-batched motion replay pipeline for recorded smartphone IMU data (100&ndash;50 Hz interpolation, offset removal, intensity scaling) across parallel training environments.</li>
-        <li>Trained PPO balance policies on the platform and built an evaluation harness measuring survival rate, body tilt, and platform kinematics.</li>
-      </ul>
+
       <div class="stats">
         <div class="stat">
           <div class="num">8.6% &rarr; 99.2%</div>
@@ -164,6 +243,7 @@
           <div class="label">Survival on unseen 5&deg; sinusoidal tilts: flat-ground policy vs. moving-platform-trained policy</div>
         </div>
       </div>
+
       <div class="videos">
         <div class="video-wrap">
           <div class="frame">
@@ -178,16 +258,22 @@
           <div class="caption">Demo 2</div>
         </div>
       </div>
+
+      <details>
+        <summary>Details</summary>
+        <ul>
+          <li>Built an actuated moving platform environment (roll/pitch hinges with PD position actuators) for Unitree G1 humanoid reinforcement learning research in mjlab.</li>
+          <li>Implemented a GPU-batched motion replay pipeline for recorded smartphone IMU data (100&ndash;50 Hz interpolation, offset removal, intensity scaling) across parallel training environments.</li>
+          <li>Trained PPO balance policies on the platform and built an evaluation harness measuring survival rate, body tilt, and platform kinematics.</li>
+        </ul>
+      </details>
     </div>
 
-    <div class="card">
+    <!-- ===== Featured 2: Camera-IMU quadcopter ===== -->
+    <div class="card reveal">
       <h3>Camera-IMU Navigation for an Autonomous Quadcopter</h3>
       <div class="meta">Sept 2026 &ndash; Present</div>
-      <ul>
-        <li>Designed cascaded altitude, attitude, position, and yaw controllers from transfer function models, predicting step response analytically and verifying it in simulation.</li>
-        <li>Built a 15-state error-state Kalman filter fusing a biased IMU with onboard camera gate detections, estimating accelerometer and gyro biases.</li>
-        <li>Flew a gate course on estimates alone with no collisions and 0.05 m RMS estimation error in simulation.</li>
-      </ul>
+
       <div class="stats">
         <div class="stat">
           <div class="num">99.4%</div>
@@ -198,16 +284,24 @@
           <div class="label">RMS estimation error in simulation</div>
         </div>
       </div>
+
+      <details>
+        <summary>Details</summary>
+        <ul>
+          <li>Designed cascaded altitude, attitude, position, and yaw controllers from transfer function models, predicting step response analytically and verifying it in simulation.</li>
+          <li>Built a 15-state error-state Kalman filter fusing a biased IMU with onboard camera gate detections, estimating accelerometer and gyro biases.</li>
+          <li>Flew a gate course on estimates alone with no collisions and 0.05 m RMS estimation error in simulation.</li>
+        </ul>
+      </details>
     </div>
 
-    <div class="card">
+    <p class="subhead more reveal">More projects</p>
+
+    <!-- ===== More: NeRF ===== -->
+    <div class="card reveal">
       <h3>Neural Radiance Fields (NeRF) of LEGO Loader</h3>
       <div class="meta">Georgia Tech CS 6476 (Computer Vision) &middot; Fall 2026</div>
-      <ul>
-        <li>Implemented NeRF in PyTorch (ray generation, sampling, positional encoding, MLP, volume rendering) to synthesize novel 360&deg; views of a Lego bulldozer from posed photos alone.</li>
-        <li>Extended it with two features from the original paper: view-dependent color, and hierarchical sampling that places extra samples where the coarse pass finds density.</li>
-        <li>Trained on a GPU cluster (PACE ICE) and rendered the orbit videos from a custom camera path around the object.</li>
-      </ul>
+
       <div class="stats">
         <div class="stat">
           <div class="num">+1.25 dB</div>
@@ -218,16 +312,19 @@
           <div class="label">From view-dependent color alone; hierarchical sampling added a further +0.39 dB</div>
         </div>
       </div>
-      <p class="meta" style="margin-bottom:0;">Final longer-trained model (10,000 iterations, 10 positional-encoding frequencies, 64 coarse + 128 fine samples): 26.7 dB.</p>
+      <p class="note">Final longer-trained model (10,000 iterations, 10 positional-encoding frequencies, 64 coarse + 128 fine samples): 26.7 dB.</p>
+
       <div class="media">
-        <figure>
-          <video src="media/orbit_rgb.mp4" autoplay loop muted playsinline controls width="100%" aria-label="360 degree orbit rendered from the trained NeRF of a Lego bulldozer"></video>
-          <figcaption>360&deg; orbit rendered from the trained NeRF.</figcaption>
-        </figure>
-        <figure>
-          <video src="media/orbit_side_by_side.mp4" loop muted playsinline controls width="100%" aria-label="Side-by-side orbit showing rendered color on the left and predicted depth on the right"></video>
-          <figcaption>Rendered color (left) and predicted depth (right).</figcaption>
-        </figure>
+        <div class="media-grid">
+          <figure>
+            <video data-src="media/orbit_rgb.mp4" data-autoplay loop muted playsinline controls preload="metadata" aria-label="360 degree orbit rendered from the trained NeRF of a Lego bulldozer"></video>
+            <figcaption>360&deg; orbit rendered from the trained NeRF.</figcaption>
+          </figure>
+          <figure>
+            <video data-src="media/orbit_side_by_side.mp4" loop muted playsinline controls preload="metadata" aria-label="Side-by-side orbit showing rendered color on the left and predicted depth on the right"></video>
+            <figcaption>Rendered color (left) and predicted depth (right).</figcaption>
+          </figure>
+        </div>
         <figure>
           <img src="media/test_view.png" alt="Held-out test view showing the ground truth photo, the NeRF render, and the predicted depth map" loading="lazy">
           <figcaption>Held-out test view: ground truth, NeRF render (26.7 dB), predicted depth.</figcaption>
@@ -237,10 +334,20 @@
           <figcaption>Novel views rendered every ~45&deg; around the object.</figcaption>
         </figure>
       </div>
+
+      <details>
+        <summary>Details</summary>
+        <ul>
+          <li>Implemented NeRF in PyTorch (ray generation, sampling, positional encoding, MLP, volume rendering) to synthesize novel 360&deg; views of a Lego bulldozer from posed photos alone.</li>
+          <li>Extended it with two features from the original paper: view-dependent color, and hierarchical sampling that places extra samples where the coarse pass finds density.</li>
+          <li>Trained on a GPU cluster (PACE ICE) and rendered the orbit videos from a custom camera path around the object.</li>
+        </ul>
+      </details>
     </div>
 
-    <div class="two-col">
-      <div class="card">
+    <!-- ===== More: smaller projects ===== -->
+    <div class="grid-auto">
+      <div class="card reveal">
         <h3>Lockheed Martin Capstone</h3>
         <div class="meta">Georgia Tech &middot; Aug &ndash; Nov 2024</div>
         <ul>
@@ -249,29 +356,29 @@
         </ul>
       </div>
 
-      <div class="card">
+      <div class="card reveal">
         <h3>Hytech Racing (Formula SAE)</h3>
         <div class="meta">Suspension Engineer &middot; Aug 2024 &ndash; Dec 2025</div>
         <ul>
           <li>Redesigned and manufactured a suspension damper elongation attachment so existing dampers could be reused.</li>
         </ul>
       </div>
-    </div>
 
-    <div class="card">
-      <h3>Creative Decisions and Design (ME2110)</h3>
-      <div class="meta">Georgia Tech &middot; Aug &ndash; Nov 2024</div>
-      <ul>
-        <li>Led a team of 4 to finish 8th out of 66 teams, building a robot under volume, cost, and time constraints with a pneumatic system, 2 motors, and an Arduino.</li>
-        <li>Turned concepts into prototypes with 3D printing and SolidWorks, then manufactured them using a laser cutter, bandsaw, drill press, Dremel, lathe, and waterjet.</li>
-      </ul>
+      <div class="card reveal">
+        <h3>Creative Decisions and Design (ME2110)</h3>
+        <div class="meta">Georgia Tech &middot; Aug &ndash; Nov 2024</div>
+        <ul>
+          <li>Led a team of 4 to finish 8th out of 66 teams, building a robot under volume, cost, and time constraints with a pneumatic system, 2 motors, and an Arduino.</li>
+          <li>Turned concepts into prototypes with 3D printing and SolidWorks, then manufactured them using a laser cutter, bandsaw, drill press, Dremel, lathe, and waterjet.</li>
+        </ul>
+      </div>
     </div>
   </section>
 
   <section id="experience">
-    <h2>Experience</h2>
+    <h2 class="reveal">Experience</h2>
 
-    <div class="card">
+    <div class="card reveal">
       <h3>Graduate Robotics Research Assistant, LIDAR Lab</h3>
       <div class="meta">Georgia Tech &middot; Atlanta, GA &middot; Aug 2026 &ndash; Present</div>
       <ul>
@@ -279,7 +386,7 @@
       </ul>
     </div>
 
-    <div class="card">
+    <div class="card reveal">
       <h3>Controls Engineer Intern, Carrier</h3>
       <div class="meta">Atlanta, GA &middot; Summer 2025 &amp; 2026</div>
       <ul>
@@ -289,7 +396,7 @@
       </ul>
     </div>
 
-    <div class="card">
+    <div class="card reveal">
       <h3>Quality Engineer Intern, Perryman Company</h3>
       <div class="meta">Pittsburgh, PA &middot; Summer 2023 &amp; 2024</div>
       <ul>
@@ -299,7 +406,7 @@
       </ul>
     </div>
 
-    <div class="card">
+    <div class="card reveal">
       <h3>Statics Learning Assistant, Georgia Tech</h3>
       <div class="meta">Jan 2024 &ndash; May 2026</div>
       <ul>
@@ -309,9 +416,9 @@
   </section>
 
   <section id="skills">
-    <h2>Skills &amp; Education</h2>
+    <h2 class="reveal">Skills &amp; Education</h2>
     <div class="two-col">
-      <div class="card">
+      <div class="card reveal">
         <h3>Technical Skills</h3>
         <div class="tags">
           <span>Python</span><span>C++</span><span>MATLAB</span><span>MuJoCo</span>
@@ -322,7 +429,7 @@
           <span>Lathe</span><span>Miter Saw</span><span>Band Saw</span><span>Drill Press</span><span>Waterjet</span>
         </div>
       </div>
-      <div class="card">
+      <div class="card reveal">
         <h3>Education</h3>
         <ul style="margin-top:10px;">
           <li>Georgia Institute of Technology, M.S. Mechanical Engineering (Aug 2026 &ndash; May 2027)</li>
@@ -333,14 +440,14 @@
   </section>
 
   <section id="awards">
-    <h2>Awards</h2>
-    <div class="card">
+    <h2 class="reveal">Awards</h2>
+    <div class="card reveal">
       <h3>Georgia Tech Honors Day Award</h3>
       <div class="meta" style="margin-bottom:0;">Georgia Institute of Technology &middot; May 2025</div>
     </div>
   </section>
 
-  <section id="contact">
+  <section id="contact" class="reveal">
     <h2>Contact</h2>
     <p>
       The best ways to reach me are
@@ -352,6 +459,83 @@
   <footer>
     <p>&copy; 2026 Benjamin Du</p>
   </footer>
+
+  <script>
+    (function () {
+      document.documentElement.classList.add('js');
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var hasIO = 'IntersectionObserver' in window;
+
+      /* Mobile menu */
+      var nav = document.querySelector('nav');
+      var btn = document.querySelector('.menu-btn');
+      btn.addEventListener('click', function () {
+        var open = nav.classList.toggle('open');
+        btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      nav.querySelectorAll('.links a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          nav.classList.remove('open');
+          btn.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      /* Highlight the section currently in view */
+      var linkMap = {};
+      nav.querySelectorAll('a.nav-link').forEach(function (a) {
+        linkMap[a.getAttribute('href').slice(1)] = a;
+      });
+
+      /* Fade-in on scroll */
+      var reveals = document.querySelectorAll('.reveal');
+
+      /* Videos: load when near the screen, autoplay only while visible, pause when scrolled away */
+      var videos = document.querySelectorAll('video[data-src]');
+      function loadVideo(v) { if (!v.getAttribute('src')) { v.src = v.getAttribute('data-src'); } }
+
+      if (!hasIO) {
+        reveals.forEach(function (el) { el.classList.add('in'); });
+        videos.forEach(loadVideo);
+        return;
+      }
+
+      var spy = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting && linkMap[e.target.id]) {
+            Object.keys(linkMap).forEach(function (k) { linkMap[k].removeAttribute('aria-current'); });
+            linkMap[e.target.id].setAttribute('aria-current', 'true');
+          }
+        });
+      }, { rootMargin: '-45% 0px -50% 0px' });
+      Object.keys(linkMap).forEach(function (id) {
+        var s = document.getElementById(id);
+        if (s) { spy.observe(s); }
+      });
+
+      var rv = new IntersectionObserver(function (entries, obs) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); }
+        });
+      }, { threshold: 0.08 });
+      reveals.forEach(function (el) { rv.observe(el); });
+
+      var vo = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          var v = e.target;
+          if (e.isIntersecting) {
+            loadVideo(v);
+            if (v.hasAttribute('data-autoplay') && !reduce) {
+              var p = v.play();
+              if (p && p.catch) { p.catch(function () {}); }
+            }
+          } else if (!v.paused) {
+            v.pause();
+          }
+        });
+      }, { rootMargin: '150px 0px', threshold: 0.2 });
+      videos.forEach(function (v) { vo.observe(v); });
+    })();
+  </script>
 
 </body>
 </html>
