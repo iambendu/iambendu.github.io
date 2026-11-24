@@ -90,6 +90,14 @@
     }
     .video-wrap .caption { font-size: 0.85rem; color: var(--muted); margin-top: 6px; text-align: center; }
 
+    .media { margin-top: 18px; }
+    .media figure { margin-bottom: 18px; }
+    .media video, .media img {
+      display: block; max-width: 100%; height: auto;
+      border-radius: 10px; border: 1px solid var(--border); background: #000;
+    }
+    .media figcaption { font-size: 0.85rem; color: var(--muted); margin-top: 6px; }
+
     .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
     @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
 
@@ -117,8 +125,8 @@
       robots, from drones to humanoids.
     </p>
     <div class="buttons">
-      <a class="btn primary" href="#projects">Projects</a>
-      <a class="btn" href="resume.pdf">Resume</a>
+      <a class="btn primary" href="#projects">See my projects</a>
+      <a class="btn" href="resume.pdf">Resume (PDF)</a>
       <a class="btn" href="https://www.linkedin.com/in/benjamin-du">LinkedIn</a>
       <!-- <a class="btn" href="https://github.com/iambendu">GitHub</a> -->
     </div>
@@ -192,6 +200,48 @@
         </div>
       </div>
       <div class="tags"><span>Kalman Filter</span><span>State Estimation</span><span>Flight Control</span><span>MuJoCo</span><span>Python</span></div>
+    </div>
+
+    <div class="card">
+      <h3>Neural Radiance Fields (NeRF) from Scratch</h3>
+      <div class="meta">Georgia Tech CS 6476 (Computer Vision) &middot; Fall 2026</div>
+      <ul>
+        <li>Implemented NeRF in PyTorch (ray generation, sampling, positional encoding, MLP, volume rendering) to synthesize novel 360&deg; views of a Lego bulldozer from posed photos alone.</li>
+        <li>Extended it with two features from the original paper: view-dependent color, and hierarchical sampling that places extra samples where the coarse pass finds density.</li>
+        <li>Trained on a GPU cluster (PACE ICE) and rendered the orbit videos from a custom camera path around the object.</li>
+      </ul>
+      <div class="stats">
+        <div class="stat">
+          <div class="num">+1.25 dB</div>
+          <div class="label">Test PSNR over the baseline (25.31 &rarr; 26.56 dB), same seed, learning rate, and 3000 iterations</div>
+        </div>
+        <div class="stat">
+          <div class="num">+0.86 dB</div>
+          <div class="label">From view-dependent color alone; hierarchical sampling added a further +0.39 dB</div>
+        </div>
+      </div>
+      <p class="meta" style="margin-bottom:0;">Final longer-trained model (10,000 iterations, 10 positional-encoding frequencies, 64 coarse + 128 fine samples): 26.7 dB.</p>
+      <div class="media">
+        <figure>
+          <video src="media/orbit_rgb.mp4" autoplay loop muted playsinline controls width="100%" aria-label="360 degree orbit rendered from the trained NeRF of a Lego bulldozer"></video>
+          <figcaption>360&deg; orbit rendered from the trained NeRF.</figcaption>
+        </figure>
+        <figure>
+          <video src="media/orbit_side_by_side.mp4" loop muted playsinline controls width="100%" aria-label="Side-by-side orbit showing rendered color on the left and predicted depth on the right"></video>
+          <figcaption>Rendered color (left) and predicted depth (right).</figcaption>
+        </figure>
+        <figure>
+          <img src="media/test_view.png" alt="Held-out test view showing the ground truth photo, the NeRF render, and the predicted depth map" loading="lazy">
+          <figcaption>Held-out test view: ground truth, NeRF render (26.7 dB), predicted depth.</figcaption>
+        </figure>
+        <figure>
+          <img src="media/novel_views.png" alt="Novel views of the Lego bulldozer rendered every 45 degrees around the object" loading="lazy">
+          <figcaption>Novel views rendered every ~45&deg; around the object.</figcaption>
+        </figure>
+      </div>
+      <div class="tags"><span>PyTorch</span><span>Python</span><span>Computer Vision</span><span>3D Reconstruction</span><span>Volume Rendering</span></div>
+      <!-- Add a link here once the repo is public:
+      <p style="margin-top:14px;"><a href="GITHUB-URL">View code &rarr;</a></p> -->
     </div>
 
     <div class="two-col">
