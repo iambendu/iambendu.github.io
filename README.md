@@ -1,4 +1,4 @@
-# Ben Du | Portfolio
+# Benjamin Du | Portfolio
 
 Personal portfolio site, live at https://iambendu.github.io
 
