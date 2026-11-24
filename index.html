@@ -113,6 +113,7 @@
     }
     .card h3 { font-size: 1.2rem; margin-bottom: 4px; color: var(--text); }
     .meta { color: var(--muted); font-size: 0.95rem; margin-bottom: 12px; }
+    .summary { color: var(--body); margin: 4px 0 8px; }
     .card ul { padding-left: 20px; color: var(--body); }
     .card li { margin-bottom: 6px; }
     .tags { margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap; }
@@ -194,7 +195,7 @@
         <a class="nav-link" href="#skills">Skills</a>
         <a class="nav-link" href="#awards">Awards</a>
         <a class="nav-link" href="#contact">Contact</a>
-        <a class="nav-resume" href="resume.pdf">Resume</a>
+        <a class="nav-resume" href="resume.pdf" target="_blank" rel="noopener">Resume</a>
       </div>
     </div>
   </nav>
@@ -207,7 +208,7 @@
     </p>
     <div class="buttons">
       <a class="btn primary" href="#projects">Projects</a>
-      <a class="btn" href="resume.pdf">Resume</a>
+      <a class="btn" href="resume.pdf" target="_blank" rel="noopener">Resume</a>
       <a class="btn" href="https://www.linkedin.com/in/benjamin-du">LinkedIn</a>
       <!-- <a class="btn" href="https://github.com/iambendu">GitHub</a> -->
     </div>
@@ -232,6 +233,7 @@
     <div class="card reveal">
       <h3>Moving-Platform Reinforcement Learning for the Unitree G1 Humanoid</h3>
       <div class="meta">Graduate research, LIDAR Lab, Georgia Tech &middot; Aug 2026 &ndash; Present</div>
+      <p class="summary">Humanoid robots are typically trained on flat, stationary ground and struggle when the surface moves. This research trains a Unitree G1 humanoid in simulation to maintain balance on a moving platform driven by real recorded motion.</p>
 
       <div class="stats">
         <div class="stat">
@@ -273,6 +275,7 @@
     <div class="card reveal">
       <h3>Camera-IMU Navigation for an Autonomous Quadcopter</h3>
       <div class="meta">Sept 2026 &ndash; Present</div>
+      <p class="summary">This project develops GPS-free navigation for an autonomous quadcopter by fusing inertial sensor data with camera-based gate detections through a Kalman filter. The resulting position estimates were accurate enough to fly a gate course in simulation.</p>
 
       <div class="stats">
         <div class="stat">
@@ -299,6 +302,7 @@
     <div class="card reveal">
       <h3>Neural Radiance Fields (NeRF) of LEGO Loader</h3>
       <div class="meta">Georgia Tech CS 6476 (Computer Vision) &middot; Fall 2026</div>
+      <p class="summary">Neural Radiance Fields reconstruct a 3D scene from a set of photographs and generate new views from unseen angles. I implemented the method from scratch and extended it with view-dependent color and hierarchical sampling. Reconstruction of this kind supports robot perception and mapping.</p>
 
       <div class="stats">
         <div class="stat">
